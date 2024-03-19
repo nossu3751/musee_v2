@@ -1,4 +1,5 @@
 #DEFINING SCHEMA
+from typing import Dict, List
 from pydantic import BaseModel, EmailStr
 
 class UserBase(BaseModel):

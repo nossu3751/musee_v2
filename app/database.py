@@ -1,9 +1,15 @@
 # HANDLING DB CONNECTIONS
 import aiosqlite
+import asyncio
+from sqlalchemy import create_engine
+from sqlalchemy.ext.asyncio import create_async_engine
+import models
 from typing import AsyncGenerator
-from fastapi import Depends
 
-DATABASE_URL = "sqlite_async:///./test.db"
+DATABASE_URL = "sqlite:///./test_db.db"
+engine = create_engine(DATABASE_URL)
+models.Base.metadata.drop_all(engine)
+models.Base.metadata.create_all(engine)
 
 # indicating that get_db is an async generator function that yields aiosqlite.
 #Connection objects and eventually returns None when it's done.
